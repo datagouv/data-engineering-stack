@@ -1,0 +1,6 @@
+airflow-logs/
+dags/
+logs/
+pg-worker/
+ssh/
+.env

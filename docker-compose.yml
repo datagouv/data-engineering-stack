@@ -1,0 +1,48 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:12
+    env_file:
+      - .env
+    ports:
+      - "5434:5432"
+
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: webserver
+    restart: always
+    depends_on:
+      - postgres
+    command: webserver
+    env_file:
+      - .env
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./ssh:/home/airflow/.ssh
+      - ./requirements.txt:/opt/airflow/requirements.txt
+    ports:
+      - "8080:8080"
+      - "8794:8793"
+    entrypoint: ./scripts/airflow-entrypoint.sh
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 32
+
+  postgres-worker:
+    image: postgres:13
+    env_file:
+      - .env
+    volumes:
+      - ./pg-worker:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+    restart: always
