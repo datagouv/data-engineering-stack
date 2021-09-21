@@ -1,2 +1,3 @@
 minio
-s3
+boto3
+emails
