@@ -1,6 +1,6 @@
-mkdir dags
-mkdir logs
-mkdir pg-worker
-mkdir plugins
-mkdir scripts
-mkdir ssh
+mkdir -p dags
+mkdir -p logs
+mkdir -p pg-worker
+mkdir -p plugins
+mkdir -p scripts
+mkdir -p ssh
