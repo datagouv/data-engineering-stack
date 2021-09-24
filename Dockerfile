@@ -14,7 +14,9 @@ USER airflow
 
 RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org boto3
 
-USER ${AIRFLOW_UID}
+# USER ${AIRFLOW_UID}
+USER airflow
+
 
 ADD requirements.txt /requirements.txt
 

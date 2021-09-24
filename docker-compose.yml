@@ -21,7 +21,7 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - ./scripts:/opt/airflow/scripts
-      - ./logs:/opt/airflow/logs
+      # - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
       - ./ssh:/home/airflow/.ssh
       - ./requirements.txt:/opt/airflow/requirements.txt
