@@ -6,6 +6,8 @@ ARG AIRFLOW_HOME=/opt/airflow
 
 ADD dags /opt/airflow/dags 
 
+ADD airflow.cfg /opt/airflow/airflow.cfg
+
 RUN pip install --upgrade pip 
 
 USER airflow 
