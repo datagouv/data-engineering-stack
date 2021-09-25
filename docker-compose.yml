@@ -2,6 +2,9 @@ version: "3"
 services:
   postgres:
     image: postgres:12
+    user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
+    volumes:
+      - ./pg-airflow:/var/lib/postgresql/data
     env_file:
       - .env
     ports:
@@ -21,7 +24,7 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - ./scripts:/opt/airflow/scripts
-      # - ./logs:/opt/airflow/logs
+      - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
       - ./ssh:/home/airflow/.ssh
       - ./requirements.txt:/opt/airflow/requirements.txt
@@ -39,6 +42,7 @@ services:
     image: postgres:13
     env_file:
       - .env
+    user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
     volumes:
       - ./pg-worker:/var/lib/postgresql/data
     healthcheck:

@@ -2,5 +2,6 @@ airflow-logs/
 dags/
 logs/
 pg-worker/
+pg-airflow/
 ssh/
 .env

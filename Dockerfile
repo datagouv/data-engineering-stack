@@ -10,6 +10,8 @@ ADD airflow.cfg /opt/airflow/airflow.cfg
 
 RUN pip install --upgrade pip 
 
+RUN chown -R "airflow:airflow" /opt/airflow/
+
 USER airflow 
 
 RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org boto3
