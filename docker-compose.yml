@@ -9,7 +9,6 @@ services:
       - .env
     ports:
       - "5434:5432"
-
   webserver:
     build:
       context: .
@@ -37,16 +36,3 @@ services:
       interval: 30s
       timeout: 30s
       retries: 32
-
-  postgres-worker:
-    image: postgres:13
-    env_file:
-      - .env
-    user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
-    volumes:
-      - ./pg-worker:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "airflow"]
-      interval: 5s
-      retries: 5
-    restart: always
