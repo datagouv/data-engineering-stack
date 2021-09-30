@@ -4,3 +4,8 @@ emails
 pandas
 cchardet
 papermill
+plotly
+plotly_express
+kaleido
+ipykernel
+nbconvert
