@@ -2,7 +2,7 @@
 
 Ce repo a pour objectif de mettre en place rapidement une infrastructure Airflow permettant à chacun de tester son DAG avant mise en production.
 
-L'infrastructure actuelle est basée sur du LocalExecutor (le scheduler, le webserver et worker sont hébergées sur le même container)
+L'infrastructure actuelle est basée sur du LocalExecutor (le scheduler, le webserver et worker sont hébergés sur le même container)
 
 ## Installation
 
@@ -10,7 +10,7 @@ L'infrastructure actuelle est basée sur du LocalExecutor (le scheduler, le webs
 git clone git@gitlab.com:etalab/data-engineering/airflow-stack.git
 cd airflow-stack
 
-# Create directory necessary for Airflow to work
+# Create directories necessary for Airflow to work
 ./1_prepareDirs.sh
 
 # Optionnal - Download actual dags used in production
@@ -24,6 +24,8 @@ nano .env
 
 # Launch services
 docker-compose up --build -d
+
+# After few seconds, you can connect to http://localhost:8080 with login : AIRFLOW_ADMIN_MAIL and password : AIRFLOW_ADMIN_PASSWORD
 ```
 
 ## Refresh dags
