@@ -4,6 +4,8 @@ from airflow.models import BaseOperator
 
 import emails
 
+import logging
+
 class MailDatagouvOperator(BaseOperator):
     """
     Send a mail
@@ -63,8 +65,17 @@ class MailDatagouvOperator(BaseOperator):
             'tls': True,
             'user': self.email_user,
             'password': self.email_password,
+            'timeout': 60
         }
         if self.attachment_path:
             message.attach(data=open(self.attachment_path), filename=self.attachment_path.split('/')[-1])
-        r = message.send(to=self.email_recipients, smtp=smtp)
+        
+        retry = True
+        tries = 0
+        while retry:
+            r = message.send(to=self.email_recipients, smtp=smtp)
+            logging.info(r)
+            tries = tries + 1
+            if((r.status_code == 250) | (tries == 5)):
+                retry = False
         assert r.status_code == 250
