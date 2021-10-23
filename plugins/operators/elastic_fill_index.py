@@ -20,6 +20,8 @@ class ElasticFillIndexOperator(BaseOperator):
     :type elastic_user: str
     :param elastic_password: password for elasticsearch
     :type elastic_password: str
+    :param elastic_bulk_size: size of bulk for indexation
+    :type elastic_bulk_size: int
     :param minio_url: minio url where report should be store
     :type minio_url: str
     :param minio_bucket: minio bucket where report should be store
@@ -36,7 +38,7 @@ class ElasticFillIndexOperator(BaseOperator):
 
     supports_lineage = True
 
-    template_fields = ('elastic_url', 'elastic_index', 'elastic_user', 'elastic_password', 'minio_url', 'minio_bucket', 'minio_user', 'minio_password', 'minio_filepath', 'column_id')
+    template_fields = ('elastic_url', 'elastic_index', 'elastic_user', 'elastic_password', 'elastic_bulk_size', 'minio_url', 'minio_bucket', 'minio_user', 'minio_password', 'minio_filepath', 'column_id')
 
     def __init__(
         self,
@@ -51,6 +53,8 @@ class ElasticFillIndexOperator(BaseOperator):
         minio_password: Optional[str] = None,
         minio_filepath: Optional[str] = None,
         column_id: Optional[str] = None,
+        elastic_bulk_size: Optional[str] = None,
+        
         **kwargs,
     ) -> None:
         super().__init__(**kwargs)
@@ -65,6 +69,7 @@ class ElasticFillIndexOperator(BaseOperator):
         self.minio_password = minio_password
         self.minio_filepath = minio_filepath
         self.column_id = column_id
+        self.elastic_bulk_size = elastic_bulk_size
 
     def execute(self, context):
         if not self.elastic_url:
@@ -96,8 +101,8 @@ class ElasticFillIndexOperator(BaseOperator):
                 metadata = json.dumps({'index': {'_id': jdict['_id']}})
                 jdict.pop('_id')
                 final_json_string += metadata + '\n' + json.dumps(jdict) + '\n'
-            if(cpt % 100 == 0):
-                if(cpt % 10000 == 0): 
+            if(cpt % self.elastic_bulk_size == 0):
+                if(cpt % (self.elastic_bulk_size * 3) == 0): 
                     logging.info(str(cpt)+' indexed documents')
                 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
                 r = requests.post(self.elastic_url+self.elastic_index+'/_bulk', data=final_json_string, headers=headers, timeout=60, auth=(self.elastic_user, self.elastic_password))

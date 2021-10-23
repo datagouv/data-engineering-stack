@@ -116,12 +116,16 @@ class PapermillMinioOperator(BaseOperator):
                 metadata={'Content-Disposition': 'inline'}
             )
 
-            for file in glob.glob(self.tmp_path+"output/*"):
-                client.fput_object(
-                    self.minio_bucket, 
-                    self.minio_output_filepath+file.split('/')[-1], 
-                    file
-                )
+            for path, subdirs, files in os.walk(self.tmp_path+"output/"):
+                for name in files:
+                    print(os.path.join(path, name))
+                    isFile = os.path.isfile(os.path.join(path, name))
+                    if(isFile):
+                        client.fput_object(
+                            self.minio_bucket, 
+                            self.minio_output_filepath+os.path.join(path, name).replace(self.tmp_path,''),
+                            os.path.join(path, name)
+                        )
         
         report_url = 'https://{}/{}/{}'.format(
                 self.minio_url,

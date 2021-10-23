@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
     ports:
-      - "5434:5432"
+      - "5435:5432"
   webserver:
     build:
       context: .
@@ -28,11 +28,11 @@ services:
       - ./ssh:/home/airflow/.ssh
       - ./requirements.txt:/opt/airflow/requirements.txt
     ports:
-      - "8080:8080"
-      - "8794:8793"
+      - "8045:8080"
+      - "8745:8793"
     entrypoint: ./scripts/airflow-entrypoint.sh
     healthcheck:
-      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
       interval: 30s
       timeout: 30s
       retries: 32
