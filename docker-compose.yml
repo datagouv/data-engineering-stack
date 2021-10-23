@@ -32,7 +32,7 @@ services:
       - "8794:8793"
     entrypoint: ./scripts/airflow-entrypoint.sh
     healthcheck:
-      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
       interval: 30s
       timeout: 30s
       retries: 32
