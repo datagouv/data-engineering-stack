@@ -5,3 +5,4 @@ pg-worker/
 pg-airflow/
 ssh/
 .env
+variables.py
