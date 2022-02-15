@@ -10,14 +10,20 @@ ADD airflow.cfg /opt/airflow/airflow.cfg
 
 RUN pip install --upgrade pip 
 
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
+
 RUN apt-get update -y
 RUN apt-get install git -y
 
 RUN chown -R "airflow:root" /opt/airflow/
 
+ADD ssh /home/airflow/.ssh/
+RUN chown -R airflow:root /home/airflow/.ssh
+
 USER airflow 
 
 RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org boto3
+
 
 # USER ${AIRFLOW_UID}
 USER airflow
