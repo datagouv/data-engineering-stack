@@ -16,3 +16,4 @@ jsonschema
 Unidecode==1.3.2
 requests
 PyYAML
+openpyxl
