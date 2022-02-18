@@ -11,6 +11,7 @@ variables = [
     # Mattermost
     { 'key': 'secret_mattermost_datagouv_reporting', 'value': '' },
     { 'key': 'secret_mattermost_datagouv_activites', 'value': '' },
+    { 'key': 'secret_mattermost_schema_activite', 'value': '' },
     { 'key': 'secret_mattermost_dataeng_test', 'value': ''},
     # Minio
     { 'key': 'minio_url', 'value': '' },
