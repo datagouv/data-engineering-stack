@@ -7,8 +7,8 @@ L'infrastructure actuelle est basée sur du LocalExecutor (le scheduler, le webs
 ## Installation
 
 ```
-git clone git@gitlab.com:etalab/data-engineering/airflow-stack.git
-cd airflow-stack
+git clone git@github.com:etalab/data-engineering-stack.git
+cd data-engineering-stack
 
 # Create directories necessary for Airflow to work
 ./1_prepareDirs.sh

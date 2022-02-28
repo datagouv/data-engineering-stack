@@ -6,3 +6,4 @@ pg-airflow/
 ssh/
 .env
 variables.py
+.DS_Store
