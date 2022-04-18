@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 mkdir -p dags
 mkdir -p logs
 chmod -R 777 logs
