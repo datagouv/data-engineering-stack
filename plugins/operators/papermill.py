@@ -62,9 +62,9 @@ class PapermillOperator(BaseOperator):
         self.output_nb = output_nb
         self.parameters = parameters
         if input_nb:
-            self.inlets.append(NoteBook(url=input_nb, parameters=self.parameters))
+            self.inlets.append(NoteBook(location=input_nb, parameters=self.parameters))
         if output_nb:
-            self.outlets.append(NoteBook(url=output_nb))
+            self.outlets.append(NoteBook(location=output_nb))
 
     def execute(self, context):
         if not self.inlets or not self.outlets:
