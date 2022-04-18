@@ -1,12 +1,11 @@
 import json
 import logging
-from typing import Dict, Optional
+from typing import Optional
 
 import pandas as pd
 import requests
 from airflow.models import BaseOperator
 from minio import Minio
-from requests.auth import HTTPBasicAuth
 
 
 class ElasticFillIndexOperator(BaseOperator):
@@ -116,7 +115,7 @@ class ElasticFillIndexOperator(BaseOperator):
                 if cpt % (self.elastic_bulk_size * 3) == 0:
                     logging.info(str(cpt) + " indexed documents")
                 headers = {"Content-type": "application/json", "Accept": "text/plain"}
-                r = requests.post(
+                requests.post(
                     self.elastic_url + self.elastic_index + "/_bulk",
                     data=final_json_string,
                     headers=headers,
@@ -126,7 +125,7 @@ class ElasticFillIndexOperator(BaseOperator):
                 final_json_string = ""
 
         headers = {"Content-type": "application/json", "Accept": "text/plain"}
-        r = requests.post(
+        requests.post(
             self.elastic_url + self.elastic_index + "/_bulk",
             data=final_json_string,
             headers=headers,

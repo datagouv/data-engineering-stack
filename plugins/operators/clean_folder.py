@@ -1,6 +1,6 @@
 import os
 import shutil
-from typing import Dict, Optional
+from typing import Optional
 
 from airflow.models import BaseOperator
 

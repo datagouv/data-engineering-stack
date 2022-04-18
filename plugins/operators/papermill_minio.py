@@ -90,7 +90,7 @@ class PapermillMinioOperator(BaseOperator):
 
         os.makedirs(os.path.dirname(self.tmp_path + "output/"), exist_ok=True)
 
-        pm.execute_notebook(
+        pm.execute.execute_notebook(
             self.input_nb,
             self.tmp_path + self.output_nb,
             parameters=self.parameters,

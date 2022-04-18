@@ -4,9 +4,10 @@ from elasticsearch_dsl import (
     Float,
     Integer,
     Keyword,
-    Text, analyzer,
+    Text,
+    analyzer,
     token_filter,
-    tokenizer
+    tokenizer,
 )
 from operators.aio_color import get_next_color
 

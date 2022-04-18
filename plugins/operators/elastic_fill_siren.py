@@ -17,7 +17,7 @@ def doc_generator(df: pd.DataFrame):
         yield Siren(meta={"id": document["siret"]}, **document.to_dict()).to_dict(
             include_meta=True
         )
-        # Serialize the instance into a dictionary so that it can be saved in elasticsearch.
+    # Serialize the instance into a dictionary so that it can be saved in elasticsearch.
 
 
 class ElasticFillSirenOperator(BaseOperator):

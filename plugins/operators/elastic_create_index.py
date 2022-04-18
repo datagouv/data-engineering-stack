@@ -1,10 +1,9 @@
 import json
 import logging
-from typing import Dict, Optional
+from typing import Optional
 
 import requests
 from airflow.models import BaseOperator
-from requests.auth import HTTPBasicAuth
 
 
 class ElasticCreateIndexOperator(BaseOperator):
@@ -33,14 +32,14 @@ class ElasticCreateIndexOperator(BaseOperator):
     )
 
     def __init__(
-        self,
-        *,
-        elastic_url: Optional[str] = None,
-        elastic_index: Optional[str] = None,
-        elastic_user: Optional[str] = None,
-        elastic_password: Optional[str] = None,
-        elastic_index_shards: Optional[str] = None,
-        **kwargs,
+            self,
+            *,
+            elastic_url: Optional[str] = None,
+            elastic_index: Optional[str] = None,
+            elastic_user: Optional[str] = None,
+            elastic_password: Optional[str] = None,
+            elastic_index_shards: Optional[str] = None,
+            **kwargs,
     ) -> None:
         super().__init__(**kwargs)
 
@@ -59,7 +58,8 @@ class ElasticCreateIndexOperator(BaseOperator):
                 self.elastic_url + self.elastic_index,
                 auth=(self.elastic_user, self.elastic_password),
             )
-        except:
+        except (requests.exceptions.ConnectionError,
+                requests.exceptions.RequestException):
             pass
 
         if self.elastic_index_shards is not None:
@@ -79,4 +79,4 @@ class ElasticCreateIndexOperator(BaseOperator):
         )
 
         logging.info(r.json())
-        assert r.json()["acknowledged"] == True
+        assert r.json()["acknowledged"] is True
