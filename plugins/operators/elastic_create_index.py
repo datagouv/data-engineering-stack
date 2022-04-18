@@ -32,14 +32,14 @@ class ElasticCreateIndexOperator(BaseOperator):
     )
 
     def __init__(
-            self,
-            *,
-            elastic_url: Optional[str] = None,
-            elastic_index: Optional[str] = None,
-            elastic_user: Optional[str] = None,
-            elastic_password: Optional[str] = None,
-            elastic_index_shards: Optional[str] = None,
-            **kwargs,
+        self,
+        *,
+        elastic_url: Optional[str] = None,
+        elastic_index: Optional[str] = None,
+        elastic_user: Optional[str] = None,
+        elastic_password: Optional[str] = None,
+        elastic_index_shards: Optional[str] = None,
+        **kwargs,
     ) -> None:
         super().__init__(**kwargs)
 
@@ -58,8 +58,10 @@ class ElasticCreateIndexOperator(BaseOperator):
                 self.elastic_url + self.elastic_index,
                 auth=(self.elastic_user, self.elastic_password),
             )
-        except (requests.exceptions.ConnectionError,
-                requests.exceptions.RequestException):
+        except (
+            requests.exceptions.ConnectionError,
+            requests.exceptions.RequestException,
+        ):
             pass
 
         if self.elastic_index_shards is not None:
