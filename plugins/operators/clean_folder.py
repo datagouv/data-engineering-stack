@@ -1,8 +1,9 @@
+import os
+import shutil
 from typing import Dict, Optional
 
 from airflow.models import BaseOperator
 
-import os, shutil
 
 class CleanFolderOperator(BaseOperator):
     """
@@ -14,7 +15,7 @@ class CleanFolderOperator(BaseOperator):
 
     supports_lineage = True
 
-    template_fields = ('folder_path',)
+    template_fields = ("folder_path",)
 
     def __init__(
         self,
@@ -25,10 +26,7 @@ class CleanFolderOperator(BaseOperator):
         super().__init__(**kwargs)
 
         self.folder_path = folder_path
-        
+
     def execute(self, context):
         if os.path.exists(self.folder_path) and os.path.isdir(self.folder_path):
             shutil.rmtree(self.folder_path)
-    
-
-

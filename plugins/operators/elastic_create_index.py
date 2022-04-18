@@ -1,10 +1,11 @@
+import json
+import logging
 from typing import Dict, Optional
 
-from airflow.models import BaseOperator
 import requests
+from airflow.models import BaseOperator
 from requests.auth import HTTPBasicAuth
-import logging
-import json
+
 
 class ElasticCreateIndexOperator(BaseOperator):
     """
@@ -23,7 +24,13 @@ class ElasticCreateIndexOperator(BaseOperator):
 
     supports_lineage = True
 
-    template_fields = ('elastic_url', 'elastic_index', 'elastic_user', 'elastic_password', 'elastic_index_shards')
+    template_fields = (
+        "elastic_url",
+        "elastic_index",
+        "elastic_user",
+        "elastic_password",
+        "elastic_index_shards",
+    )
 
     def __init__(
         self,
@@ -48,31 +55,28 @@ class ElasticCreateIndexOperator(BaseOperator):
             raise ValueError("Please provide elasticsearch url endpoint")
 
         try:
-            r = requests.delete(self.elastic_url+self.elastic_index, auth=(self.elastic_user,self.elastic_password))
+            r = requests.delete(
+                self.elastic_url + self.elastic_index,
+                auth=(self.elastic_user, self.elastic_password),
+            )
         except:
             pass
-        
+
         if self.elastic_index_shards is not None:
             settings = {
-                'settings': {
-                    'index' : {
-                        'number_of_shards': self.elastic_index_shards
-                    }
+                "settings": {"index": {"number_of_shards": self.elastic_index_shards}}
             }
-        }
         else:
             settings = {}
 
-        headers = {
-            "Content-Type": "application/json"
-        }
+        headers = {"Content-Type": "application/json"}
 
         r = requests.put(
-            self.elastic_url+self.elastic_index, 
+            self.elastic_url + self.elastic_index,
             headers=headers,
             data=json.dumps(settings),
-            auth=(self.elastic_user,self.elastic_password)
+            auth=(self.elastic_user, self.elastic_password),
         )
 
         logging.info(r.json())
-        assert r.json()['acknowledged'] == True
+        assert r.json()["acknowledged"] == True
