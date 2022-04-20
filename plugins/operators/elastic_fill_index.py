@@ -1,12 +1,11 @@
-from typing import Dict, Optional
-
-from airflow.models import BaseOperator
-import requests
-from requests.auth import HTTPBasicAuth
-import logging
-import pandas as pd
-from minio import Minio
 import json
+import logging
+from typing import Optional
+
+import pandas as pd
+import requests
+from airflow.models import BaseOperator
+from minio import Minio
 
 
 class ElasticFillIndexOperator(BaseOperator):
@@ -38,7 +37,19 @@ class ElasticFillIndexOperator(BaseOperator):
 
     supports_lineage = True
 
-    template_fields = ('elastic_url', 'elastic_index', 'elastic_user', 'elastic_password', 'elastic_bulk_size', 'minio_url', 'minio_bucket', 'minio_user', 'minio_password', 'minio_filepath', 'column_id')
+    template_fields = (
+        "elastic_url",
+        "elastic_index",
+        "elastic_user",
+        "elastic_password",
+        "elastic_bulk_size",
+        "minio_url",
+        "minio_bucket",
+        "minio_user",
+        "minio_password",
+        "minio_filepath",
+        "column_id",
+    )
 
     def __init__(
         self,
@@ -54,7 +65,6 @@ class ElasticFillIndexOperator(BaseOperator):
         minio_filepath: Optional[str] = None,
         column_id: Optional[str] = None,
         elastic_bulk_size: Optional[str] = None,
-        
         **kwargs,
     ) -> None:
         super().__init__(**kwargs)
@@ -74,41 +84,51 @@ class ElasticFillIndexOperator(BaseOperator):
     def execute(self, context):
         if not self.elastic_url:
             raise ValueError("Please provide elasticsearch url endpoint")
-        
+
         client = Minio(
             self.minio_url,
             access_key=self.minio_user,
             secret_key=self.minio_password,
-            secure=True
+            secure=True,
         )
         obj = client.get_object(
             self.minio_bucket,
             self.minio_filepath,
         )
-        df = pd.read_csv(obj,dtype=str)
+        df = pd.read_csv(obj, dtype=str)
 
-        logging.info('Retrieve file ok - '+str(df.shape[0])+' documents to process')
+        logging.info("Retrieve file ok - " + str(df.shape[0]) + " documents to process")
 
-        df['_id'] = df[self.column_id]
-        df_as_json = df.to_json(orient='records', lines=True)
+        df["_id"] = df[self.column_id]
+        df_as_json = df.to_json(orient="records", lines=True)
 
         cpt = 0
-        final_json_string = ''
-        for json_document in df_as_json.split('\n'):
+        final_json_string = ""
+        for json_document in df_as_json.split("\n"):
             cpt = cpt + 1
-            if(json_document != ''):
+            if json_document != "":
                 jdict = json.loads(json_document)
-                metadata = json.dumps({'index': {'_id': jdict['_id']}})
-                jdict.pop('_id')
-                final_json_string += metadata + '\n' + json.dumps(jdict) + '\n'
-            if(cpt % self.elastic_bulk_size == 0):
-                if(cpt % (self.elastic_bulk_size * 3) == 0): 
-                    logging.info(str(cpt)+' indexed documents')
-                headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-                r = requests.post(self.elastic_url+self.elastic_index+'/_bulk', data=final_json_string, headers=headers, timeout=60, auth=(self.elastic_user, self.elastic_password))
-                final_json_string = ''
+                metadata = json.dumps({"index": {"_id": jdict["_id"]}})
+                jdict.pop("_id")
+                final_json_string += metadata + "\n" + json.dumps(jdict) + "\n"
+            if cpt % self.elastic_bulk_size == 0:
+                if cpt % (self.elastic_bulk_size * 3) == 0:
+                    logging.info(str(cpt) + " indexed documents")
+                headers = {"Content-type": "application/json", "Accept": "text/plain"}
+                requests.post(
+                    self.elastic_url + self.elastic_index + "/_bulk",
+                    data=final_json_string,
+                    headers=headers,
+                    timeout=60,
+                    auth=(self.elastic_user, self.elastic_password),
+                )
+                final_json_string = ""
 
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-        r = requests.post(self.elastic_url+self.elastic_index+'/_bulk', data=final_json_string, headers=headers, timeout=60, auth=(self.elastic_user, self.elastic_password))
-
-
+        headers = {"Content-type": "application/json", "Accept": "text/plain"}
+        requests.post(
+            self.elastic_url + self.elastic_index + "/_bulk",
+            data=final_json_string,
+            headers=headers,
+            timeout=60,
+            auth=(self.elastic_user, self.elastic_password),
+        )
