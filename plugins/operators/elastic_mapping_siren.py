@@ -2,6 +2,7 @@ from elasticsearch_dsl import (
     Date,
     Document,
     Float,
+    GeoPoint,
     Integer,
     Keyword,
     Text,
@@ -73,6 +74,7 @@ class Siren(Document):
     concat_nom_adr_siren = Text(
         analyzer=annuaire_analyzer, fields={"keyword": Keyword()}
     )
+    coordonnees = GeoPoint()
     date_creation = Date()
     date_creation_entreprise = Date()
     date_debut_activite = Date()
