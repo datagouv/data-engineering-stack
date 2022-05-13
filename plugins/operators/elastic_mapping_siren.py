@@ -1,4 +1,5 @@
 from elasticsearch_dsl import (
+    Boolean,
     Date,
     Document,
     Float,
@@ -64,8 +65,8 @@ class Siren(Document):
     one siren number and the corresponding sheadquarters siret number
     """
 
-    activite_principale = Keyword()  # Add index_prefixes option
-    activite_principale_entreprise = Keyword()
+    activite_principale_siege = Keyword()  # Add index_prefixes option
+    activite_principale_unite_legale = Keyword()
     activite_principale_registre_metier = Keyword()
     categorie_entreprise = Text()
     code_postal = Keyword()
@@ -75,38 +76,39 @@ class Siren(Document):
         analyzer=annuaire_analyzer, fields={"keyword": Keyword()}
     )
     coordonnees = GeoPoint()
-    date_creation = Date()
-    date_creation_entreprise = Date()
-    date_debut_activite = Date()
+    date_creation_siege = Date()
+    date_creation_unite_legale = Date()
+    date_debut_activite_siege = Date()
     date_mise_a_jour = Date()
     economie_sociale_solidaire_unite_legale = Keyword()
     enseigne = Text()
     etat_administratif_unite_legale = Keyword()
-    etat_administratif_etablissement = Keyword()
+    etat_administratif_siege = Keyword()
     geo_adresse = Text(analyzer=annuaire_analyzer)
     identifiant_association_unite_legale = Keyword()
     indice_repetition = Text()
-    is_siege = Text()
+    is_entrepreneur_individuel = Boolean()
+    is_siege = Boolean()
     latitude = Text()
     libelle_commune = Text()
     libelle_voie = Text()
     liste_adresse = Text(analyzer=annuaire_analyzer)
     liste_enseigne = Text(analyzer=annuaire_analyzer)
     longitude = Text()
-    nature_juridique_entreprise = Integer()
+    nature_juridique_unite_legale = Integer()
     nom = Text()
     nom_complet = Text(analyzer=annuaire_analyzer, fields={"keyword": Keyword()})
     nom_raison_sociale = Text()
-    nombre_etablissements = Float()  # NaN can't be stored in an integer array
-    nombre_etablissements_ouvert = Float()
+    nombre_etablissements = Integer()  # NaN can't be stored in an integer array
+    nombre_etablissements_ouverts = Integer()
     numero_voie = Text()
     prenom = Keyword()
     sigle = Keyword()
     siren = Keyword(required=True)
-    siret = Keyword(required=True)
+    siret_siege = Keyword(required=True)
     type_voie = Text()
-    tranche_effectif_salarie = Keyword()
-    tranche_effectif_salarie_entreprise = Keyword()
+    tranche_effectif_salarie_siege = Keyword()
+    tranche_effectif_salarie_unite_legale = Keyword()
 
     class Index:
         name = "siren-{}".format(NEXT_COLOR)
