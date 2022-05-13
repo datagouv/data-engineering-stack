@@ -2,7 +2,6 @@ from elasticsearch_dsl import (
     Boolean,
     Date,
     Document,
-    Float,
     GeoPoint,
     Integer,
     Keyword,
