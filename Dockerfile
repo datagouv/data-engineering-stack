@@ -1,4 +1,4 @@
-FROM apache/airflow
+FROM apache/airflow:latest-python3.8
 
 USER root 
 
@@ -8,7 +8,11 @@ ADD dags /opt/airflow/dags
 
 ADD airflow.cfg /opt/airflow/airflow.cfg
 
+USER airflow
+
 RUN pip install --upgrade pip 
+
+USER root
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
 
