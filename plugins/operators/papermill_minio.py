@@ -135,7 +135,7 @@ class PapermillMinioOperator(BaseOperator):
                             os.path.join(path, name),
                         )
 
-         report_url = 'https://{}/{}/{}'.format(
+        report_url = 'https://{}/{}/{}'.format(
                 self.minio_url,
                 self.minio_bucket,
                 self.minio_output_filepath+output_report.split('/')[-1]
