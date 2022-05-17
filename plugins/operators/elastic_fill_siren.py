@@ -14,7 +14,7 @@ from operators.elastic_mapping_siren import Siren
 def doc_generator(df: pd.DataFrame):
     df_iter = df.iterrows()
     for index, document in df_iter:
-        yield Siren(meta={"id": document["siret"]}, **document.to_dict()).to_dict(
+        yield Siren(meta={"id": document["siret_siege"]}, **document.to_dict()).to_dict(
             include_meta=True
         )
     # Serialize the instance into a dictionary so that it can be saved in elasticsearch.
