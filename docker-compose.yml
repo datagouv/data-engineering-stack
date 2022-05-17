@@ -9,6 +9,7 @@ services:
       - .env
     ports:
       - "${AIRFLOW_POSTGRES_PORT}:5432"
+    container_name: "$airflow-db-{AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
   webserver:
     build:
       context: .
@@ -35,3 +36,4 @@ services:
       interval: 30s
       timeout: 30s
       retries: 32
+    container_name: "$airflow-{AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
