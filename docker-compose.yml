@@ -36,4 +36,4 @@ services:
       interval: 30s
       timeout: 30s
       retries: 32
-    container_name: "xairflow-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
+    container_name: "airflow-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
