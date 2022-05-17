@@ -29,7 +29,7 @@ class PythonMinioOperator(PythonOperator):
         "minio_user",
         "minio_password",
         "minio_output_filepath",
-        *PythonOperator.template_fields
+        *PythonOperator.template_fields,
     )
 
     def __init__(
@@ -75,6 +75,8 @@ class PythonMinioOperator(PythonOperator):
                         client.fput_object(
                             self.minio_bucket,
                             self.minio_output_filepath
-                            + os.path.join(path, name).replace(self.tmp_path, ""),
+                            + os.path.join(path, name).replace(
+                                self.tmp_path, ""
+                            ),
                             os.path.join(path, name),
                         )
