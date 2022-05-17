@@ -3,9 +3,7 @@ table-schema-to-markdown==0.4.6
 frictionless==4.25.1
 jsonschema
 Unidecode==1.3.2
-requests
 PyYAML
-openpyxl
 geojson
 shapely
 minio==7.1.3
