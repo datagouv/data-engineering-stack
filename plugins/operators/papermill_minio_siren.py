@@ -21,7 +21,7 @@ class NoteBook(File):
     meta_schema: str = __name__ + ".NoteBook"
 
 
-class PapermillMinioOperator(BaseOperator):
+class PapermillMinioSirenOperator(BaseOperator):
     """
     Executes a jupyter notebook through papermill that is annotated with parameters
     :param input_nb: input notebook (can also be a NoteBook or a File inlet)
