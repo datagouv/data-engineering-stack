@@ -17,8 +17,5 @@ def get_next_color():
         logging.info(f'******************** AIO URL: {AIO_URL}/colors')
         logging.info(f'******************** NEXT COLOR: {next_color}')
         return next_color
-    except requests.exceptions.HTTPError as errh:
-        raise HTTPError(errh)
-    except (requests.exceptions.RequestException, requests.exceptions.Timeout,
-            requests.exceptions.ConnectionError) as err:
-        raise Exception("OOps: Error", err)
+    except requests.exceptions.RequestException as error:
+        raise Exception("OOps: Error", error)
