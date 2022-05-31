@@ -102,6 +102,7 @@ class Siren(Document):
     nombre_etablissements_ouverts = Integer()
     numero_voie = Text()
     prenom = Keyword()
+    section_activite_principale = Keyword()
     sigle = Keyword()
     siren = Keyword(required=True)
     siret_siege = Keyword(required=True)
