@@ -62,17 +62,13 @@ class PapermillOperator(BaseOperator):
         self.output_nb = output_nb
         self.parameters = parameters
         if input_nb:
-            self.inlets.append(
-                NoteBook(url=input_nb, parameters=self.parameters)
-            )
+            self.inlets.append(NoteBook(url=input_nb, parameters=self.parameters))
         if output_nb:
             self.outlets.append(NoteBook(url=output_nb))
 
     def execute(self, context):
         if not self.inlets or not self.outlets:
-            raise ValueError(
-                "Input notebook or output notebook is not specified"
-            )
+            raise ValueError("Input notebook or output notebook is not specified")
 
         for i, item in enumerate(self.inlets):
             pm.execute_notebook(

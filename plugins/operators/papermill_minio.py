@@ -86,9 +86,7 @@ class PapermillMinioOperator(BaseOperator):
 
     def execute(self, context):
         if not self.input_nb or not self.output_nb:
-            raise ValueError(
-                "Input notebook or output notebook is not specified"
-            )
+            raise ValueError("Input notebook or output notebook is not specified")
 
         os.makedirs(os.path.dirname(self.tmp_path + "output/"), exist_ok=True)
 
@@ -102,12 +100,8 @@ class PapermillMinioOperator(BaseOperator):
 
         exporter = HTMLExporter()
         # read_file is '.ipynb', output_report is '.html'
-        output_report = (
-            os.path.splitext(self.tmp_path + self.output_nb)[0] + ".html"
-        )
-        output_notebook = nbformat.read(
-            self.tmp_path + self.output_nb, as_version=4
-        )
+        output_report = os.path.splitext(self.tmp_path + self.output_nb)[0] + ".html"
+        output_notebook = nbformat.read(self.tmp_path + self.output_nb, as_version=4)
         output, resources = exporter.from_notebook_node(output_notebook)
         codecs.open(output_report, "w", encoding="utf-8").write(output)
 
@@ -137,9 +131,7 @@ class PapermillMinioOperator(BaseOperator):
                         client.fput_object(
                             self.minio_bucket,
                             self.minio_output_filepath
-                            + os.path.join(path, name).replace(
-                                self.tmp_path, ""
-                            ),
+                            + os.path.join(path, name).replace(self.tmp_path, ""),
                             os.path.join(path, name),
                         )
 

@@ -15,14 +15,10 @@ def get_next_color():
         with urlopen(COLOR_URL) as url:
             data = json.loads(url.read().decode())
             next_color = data["NEXT_COLOR"]
-            logging.info(
-                f"******************** Next color from file: {next_color}"
-            )
+            logging.info(f"******************** Next color from file: {next_color}")
             return next_color
     except BaseException as error:
-        raise Exception(
-            f"******************** Ouuups Error: {error}"
-        )
+        raise Exception(f"******************** Ouuups Error: {error}")
 
 
 NEXT_COLOR = get_next_color()
