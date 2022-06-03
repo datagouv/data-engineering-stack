@@ -145,7 +145,6 @@ class ElasticFillSirenOperator(BaseOperator):
 
         elastic_mapping = Siren._index.get_mapping()
         logging.info(f"The {self.elastic_index} index mapping: {elastic_mapping}")
-        # kwargs["ti"].xcom_push(key="doc-count", value=doc_count)
 
     def count_docs(self, context):
         doc_count = self.elastic_connection.cat.count(
