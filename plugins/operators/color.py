@@ -1,8 +1,8 @@
 import json
 import logging
-import os
-from airflow.models import Variable
 from urllib.request import urlopen
+
+from airflow.models import Variable
 
 COLOR_URL = Variable.get("COLOR_URL")
 
