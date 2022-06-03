@@ -4,7 +4,7 @@ import os
 from airflow.models import Variable
 from urllib.request import urlopen
 
-COLOR_URL = Variable.get("color_url")
+COLOR_URL = Variable.get("COLOR_URL")
 
 
 def get_next_color():
