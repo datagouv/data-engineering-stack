@@ -10,9 +10,7 @@ from elasticsearch_dsl import (
     token_filter,
     tokenizer,
 )
-from operators.aio_color import get_next_color
-
-NEXT_COLOR = get_next_color()
+from operators.color import NEXT_COLOR
 
 # Define filters
 french_elision = token_filter(

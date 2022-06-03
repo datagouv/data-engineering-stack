@@ -75,8 +75,6 @@ class PythonMinioOperator(PythonOperator):
                         client.fput_object(
                             self.minio_bucket,
                             self.minio_output_filepath
-                            + os.path.join(path, name).replace(
-                                self.tmp_path, ""
-                            ),
+                            + os.path.join(path, name).replace(self.tmp_path, ""),
                             os.path.join(path, name),
                         )
