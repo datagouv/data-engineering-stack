@@ -1,9 +1,9 @@
 import json
 import logging
 import os
-import requests
-from dotenv import load_dotenv
 from urllib.request import urlopen
+
+from dotenv import load_dotenv
 
 load_dotenv()
 

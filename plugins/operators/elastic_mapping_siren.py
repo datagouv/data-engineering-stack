@@ -12,7 +12,6 @@ from elasticsearch_dsl import (
 )
 from operators.color import NEXT_COLOR
 
-
 # Define filters
 french_elision = token_filter(
     "french_elision",
