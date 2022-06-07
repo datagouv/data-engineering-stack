@@ -53,7 +53,7 @@ class PythonMinioOperator(PythonOperator):
         self.minio_output_filepath = minio_output_filepath
 
     def execute(self, context):
-        os.makedirs(os.path.dirname(self.tmp_path + "output/"), exist_ok=True)
+        os.makedirs(os.path.dirname(self.tmp_path + "/"), exist_ok=True)
 
         super().execute(context)
 
