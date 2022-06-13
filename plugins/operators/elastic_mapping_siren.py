@@ -82,6 +82,7 @@ class Siren(Document):
     etat_administratif_unite_legale = Keyword()
     etat_administratif_siege = Keyword()
     geo_adresse = Text(analyzer=annuaire_analyzer)
+    geo_id = Keyword()
     identifiant_association_unite_legale = Keyword()
     indice_repetition = Text()
     is_entrepreneur_individuel = Boolean()
