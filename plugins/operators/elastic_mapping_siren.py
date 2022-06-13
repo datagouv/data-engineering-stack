@@ -77,6 +77,7 @@ class Siren(Document):
     date_creation_unite_legale = Date()
     date_debut_activite_siege = Date()
     date_mise_a_jour = Date()
+    departement = Keyword()
     economie_sociale_solidaire_unite_legale = Keyword()
     enseigne = Text()
     etat_administratif_unite_legale = Keyword()
