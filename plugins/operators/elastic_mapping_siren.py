@@ -65,9 +65,12 @@ class Siren(Document):
     activite_principale_siege = Keyword()  # Add index_prefixes option
     activite_principale_unite_legale = Keyword()
     activite_principale_registre_metier = Keyword()
+    adresse_complete = Text()
     categorie_entreprise = Text()
+    cedex = Keyword()
     code_postal = Keyword()
     commune = Keyword()
+    complement_adresse = Text()
     concat_enseigne_adresse = Text(analyzer=annuaire_analyzer)
     concat_nom_adr_siren = Text(
         analyzer=annuaire_analyzer, fields={"keyword": Keyword()}
@@ -78,6 +81,7 @@ class Siren(Document):
     date_debut_activite_siege = Date()
     date_mise_a_jour = Date()
     departement = Keyword()
+    distribution_speciale = Text()
     economie_sociale_solidaire_unite_legale = Keyword()
     enseigne = Text()
     etat_administratif_unite_legale = Keyword()
@@ -89,6 +93,7 @@ class Siren(Document):
     is_entrepreneur_individuel = Boolean()
     is_siege = Boolean()
     latitude = Text()
+    libelle_cedex = Text()
     libelle_commune = Text()
     libelle_voie = Text()
     liste_adresse = Text(analyzer=annuaire_analyzer)
