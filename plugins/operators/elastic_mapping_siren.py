@@ -65,8 +65,8 @@ class Siren(Document):
     activite_principale_siege = Keyword()  # Add index_prefixes option
     activite_principale_unite_legale = Keyword()
     activite_principale_registre_metier = Keyword()
-    adresse_complete = Text()
-    adresse_complete_secondaire = Text()
+    adresse_etablissement = Text()
+    adresse_etablissement_2 = Text()
     categorie_entreprise = Text()
     cedex = Keyword()
     code_postal = Keyword()
