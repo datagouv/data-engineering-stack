@@ -66,6 +66,7 @@ class Siren(Document):
     activite_principale_unite_legale = Keyword()
     activite_principale_registre_metier = Keyword()
     adresse_complete = Text()
+    adresse_complete_secondaire = Text()
     categorie_entreprise = Text()
     cedex = Keyword()
     code_postal = Keyword()
