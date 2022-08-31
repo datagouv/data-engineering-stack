@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
     ports:
-      - "${AIRFLOW_POSTGRES_PORT}:5432"
+      - "127.0.0.1:${AIRFLOW_POSTGRES_PORT}:5432"
     container_name: "airflow-db-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
   webserver:
     build:
