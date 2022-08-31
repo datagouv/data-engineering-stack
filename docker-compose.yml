@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
     ports:
-      - "${AIRFLOW_POSTGRES_PORT}:5432"
+      - "127.0.0.1:${AIRFLOW_POSTGRES_PORT}:5432"
     container_name: "airflow-db-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
   webserver:
     build:
@@ -28,8 +28,8 @@ services:
       - ./plugins:/opt/airflow/plugins
       - ./requirements.txt:/opt/airflow/requirements.txt
     ports:
-      - "${AIRFLOW_WEBSERVER_PORT}:8080"
-      - "${AIRFLOW_LOG_SERVER_PORT}:8793"
+      - "127.0.0.1:${AIRFLOW_WEBSERVER_PORT}:8080"
+      - "127.0.0.1:${AIRFLOW_LOG_SERVER_PORT}:8793"
     entrypoint: ./scripts/airflow-entrypoint.sh
     healthcheck:
       test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
