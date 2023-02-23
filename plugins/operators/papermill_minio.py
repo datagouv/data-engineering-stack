@@ -89,7 +89,7 @@ class PapermillMinioOperator(BaseOperator):
             raise ValueError("Input notebook or output notebook is not specified")
 
         os.makedirs(os.path.dirname(self.tmp_path + "output/"), exist_ok=True)
-
+        
         pm.execute_notebook(
             self.input_nb,
             self.tmp_path + self.output_nb,

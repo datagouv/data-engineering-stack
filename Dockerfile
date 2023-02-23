@@ -1,4 +1,4 @@
-FROM apache/airflow:2.3.2-python3.8
+FROM apache/airflow:2.5.1-python3.8
 
 USER root 
 
@@ -18,6 +18,10 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
 
 RUN apt-get update -y
 RUN apt-get install git -y
+RUN apt-get install lftp -y
+RUN apt-get install zip -y
+RUN apt-get install wget -y
+RUN apt-get install p7zip-full -y
 
 RUN chown -R "airflow:root" /opt/airflow/
 
