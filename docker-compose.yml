@@ -2,7 +2,6 @@ version: "3"
 services:
   postgres:
     image: postgres:12
-    user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
     volumes:
       - ./pg-airflow:/var/lib/postgresql/data
     env_file:
