@@ -26,3 +26,4 @@ tweepy==4.8.0
 pytest==7.2.1
 langdetect==1.0.9
 pydantic==2.3.0
+pyproj==3.6.1
