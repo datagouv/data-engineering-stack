@@ -44,6 +44,6 @@ ADD requirements.txt /requirements.txt
 
 RUN pip install -r /requirements.txt
 
-RUN git config --global user.email "pierlou.ramade@data.gouv.fr"
-RUN git config --global user.name "Pierlou Ramade (Bot Airflow)"
+RUN git config --global user.email "your email"
+RUN git config --global user.name "your username"
 
