@@ -7,3 +7,4 @@ ssh/
 .env
 variables.py
 .DS_Store
+Dockerfile

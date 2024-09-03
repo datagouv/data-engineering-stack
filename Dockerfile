@@ -1,4 +1,5 @@
-FROM apache/airflow:2.7.3-python3.10
+
+FROM apache/airflow:2.10.0-python3.10
 
 USER root 
 
@@ -14,8 +15,7 @@ RUN pip install --upgrade pip
 
 USER root
 
-# MySQL key rotation (https://dev.mysql.com/doc/refman/8.0/en/checking-gpg-signature.html)
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A8D3785C
+# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
 
 RUN apt-get update -y
 RUN apt-get install git -y
@@ -23,6 +23,9 @@ RUN apt-get install lftp -y
 RUN apt-get install zip -y
 RUN apt-get install wget -y
 RUN apt-get install p7zip-full -y
+RUN apt-get install nano -y
+RUN apt-get install jq -y
+RUN apt-get install libmagic1 -y
 
 RUN chown -R "airflow:root" /opt/airflow/
 
@@ -41,6 +44,6 @@ ADD requirements.txt /requirements.txt
 
 RUN pip install -r /requirements.txt
 
-RUN git config --global user.email "geoffrey.aldebert@data.gouv.fr"
-RUN git config --global user.name "Geoffrey Aldebert (Bot Airflow)"
+RUN git config --global user.email "pierlou.ramade@data.gouv.fr"
+RUN git config --global user.name "Pierlou Ramade (Bot Airflow)"
 
