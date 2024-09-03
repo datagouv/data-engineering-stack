@@ -15,7 +15,8 @@ RUN pip install --upgrade pip
 
 USER root
 
-# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
+# MySQL key rotation (https://dev.mysql.com/doc/refman/8.0/en/checking-gpg-signature.html)
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A8D3785C
 
 RUN apt-get update -y
 RUN apt-get install git -y
