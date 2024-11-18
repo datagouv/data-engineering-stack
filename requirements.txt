@@ -9,7 +9,7 @@ shapely
 minio==7.1.3
 boto3==1.28.0
 emails==0.6
-pandas==1.5.3
+pandas==2.2.2
 papermill==2.3.4
 plotly==5.6.0
 plotly_express==0.4.1
