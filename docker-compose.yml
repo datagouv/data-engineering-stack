@@ -1,8 +1,7 @@
-version: "3"
 services:
   postgres:
     image: postgres:12
-    user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
+    user: root
     volumes:
       - ./pg-airflow:/var/lib/postgresql/data
     env_file:
@@ -22,7 +21,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./dags:/opt/airflow/dags
+      - ../annuaire-search-infra:/opt/airflow/dags/dag_datalake_sirene/
       - ./scripts:/opt/airflow/scripts
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
