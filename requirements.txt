@@ -14,7 +14,7 @@ papermill==2.6.0
 plotly==5.24.1
 plotly_express==0.4.1
 kaleido==0.2.1
-ipykernel==5.5.6
+ipykernel==6.29.5
 nbconvert==7.16.5
 openpyxl==3.1.5
 elasticsearch==7.17.0
