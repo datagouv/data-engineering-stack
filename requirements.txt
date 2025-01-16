@@ -11,7 +11,7 @@ boto3==1.35.0
 emails==0.6
 pandas==2.2.2
 papermill==2.6.0
-plotly==5.24.0
+plotly==5.24.1
 plotly_express==0.4.1
 kaleido==0.2.1
 ipykernel==5.5.6
