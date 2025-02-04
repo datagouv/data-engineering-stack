@@ -1,10 +1,10 @@
-version: "3"
 services:
   postgres:
     image: postgres:12
-    user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
+    user: root
     volumes:
       - ./pg-airflow:/var/lib/postgresql/data
+    restart: unless-stopped
     env_file:
       - .env
     ports:
@@ -14,15 +14,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+          - USER_EMAIL=$USER_EMAIL
+          - USER_NAME=$USER_NAME
     hostname: webserver
-    restart: always
+    restart: unless-stopped
     depends_on:
       - postgres
     command: webserver
     env_file:
       - .env
     volumes:
-      - ./dags:/opt/airflow/dags
+      - ${LOCAL_AIRFLOW_DAG_PATH}:/opt/airflow/dags/dag_datalake_sirene/
+      - ${LOCAL_TMP_PATH}:/tmp
       - ./scripts:/opt/airflow/scripts
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins

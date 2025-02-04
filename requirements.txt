@@ -27,3 +27,5 @@ pytest==7.2.1
 langdetect==1.0.9
 pydantic==2.10.5
 pyproj==3.7.0
+psycopg2-binary==2.9.10
+redis==5.2.1
