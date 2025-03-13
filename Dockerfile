@@ -1,17 +1,17 @@
 
-FROM apache/airflow:2.10.0-python3.10
+FROM apache/airflow:2.10.5-python3.12
 
-USER root 
+USER root
 
-ARG AIRFLOW_HOME=/opt/airflow 
+ARG AIRFLOW_HOME=/opt/airflow
 
-ADD dags /opt/airflow/dags 
+ADD dags /opt/airflow/dags
 
 ADD airflow.cfg /opt/airflow/airflow.cfg
 
 USER airflow
 
-RUN pip install --upgrade pip 
+RUN pip install --upgrade pip
 
 USER root
 
@@ -33,7 +33,7 @@ RUN chown -R "airflow:root" /opt/airflow/
 ADD ssh /home/airflow/.ssh/
 RUN chown -R airflow:root /home/airflow/.ssh
 
-USER airflow 
+USER airflow
 
 RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org boto3
 
@@ -47,4 +47,3 @@ RUN pip install -r /requirements.txt
 
 RUN git config --global user.email "your email"
 RUN git config --global user.name "your username"
-
