@@ -39,3 +39,6 @@ paramiko==3.5.1
 PyMuPDF==1.25.3
 sentry-sdk==2.22.0
 lxml_html_clean==0.4.1
+pygrib==2.1.6
+apache-airflow-providers-ssh==4.0.1
+apache-airflow-providers-sftp==5.1.1
