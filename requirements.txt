@@ -38,4 +38,4 @@ tenacity==9.0.0
 paramiko==3.5.1
 PyMuPDF==1.25.3
 sentry-sdk==2.22.0
-lxml_html_clean=0.4.1
+lxml_html_clean==0.4.1
