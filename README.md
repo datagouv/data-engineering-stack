@@ -13,10 +13,13 @@ cd data-engineering-stack
 # Create directories necessary for Airflow to work
 ./1_prepareDirs.sh
 
-# Prepare .env file 
+# Prepare .env file
 ./2_prepare_env.sh
-nano .env 
+nano .env
 # Edit POSTGRES_USER ; POSTGRES_PASSWORD ; POSTGRES_DB ; AIRFLOW_ADMIN_MAIL ; AIRFLOW_ADMIN_FIRSTNAME ; AIRFLOW_ADMIN_NAME ; AIRFLOW_ADMIN_PASSWORD
+
+# For MacOS with ARM:
+# export DOCKER_DEFAULT_PLATFORM="linux/amd64"
 
 # Launch services
 docker-compose up --build -d
