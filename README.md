@@ -7,7 +7,7 @@ L'infrastructure actuelle est basée sur du LocalExecutor (le scheduler, le webs
 ## Installation
 
 ```
-git clone git@github.com:etalab/data-engineering-stack.git
+git clone git@github.com:datagouv/data-engineering-stack.git
 cd data-engineering-stack
 
 # Create directories necessary for Airflow to work
@@ -34,6 +34,6 @@ docker-compose up --build -d
 ./refreshBagDags.sh
 ```
 
-## Connections
+## Variables and connections
 
 Connections can be created manually or with python scripts `createConn.py` (using Airflow API) inside each projects. You need also to add your ssh key inside `ssh` folder of repository for the container to be able to see it in `/home/airflow/.ssh/` folder of container.
