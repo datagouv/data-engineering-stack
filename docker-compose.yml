@@ -1,10 +1,11 @@
-version: "3"
 services:
   postgres:
-    image: postgres:12
-    user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
+    image: postgres:13
+    user: root
     volumes:
       - ./pg-airflow:/var/lib/postgresql/data
+      - ./postgresql/:/docker-entrypoint-initdb.d/
+    restart: unless-stopped
     env_file:
       - .env
     ports:
@@ -14,22 +15,27 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+          - USER_EMAIL=$USER_EMAIL
+          - USER_NAME=$USER_NAME
     hostname: webserver
-    restart: always
+    restart: unless-stopped
     depends_on:
       - postgres
     command: webserver
     env_file:
       - .env
     volumes:
-      - ./dags:/opt/airflow/dags
+      - ${LOCAL_AIRFLOW_DAG_PATH}:/opt/airflow/dags/datagouvfr_data_pipelines
+      - ${LOCAL_TMP_PATH}:/tmp
+      - ${LOCAL_SSH_PATH}:/home/airflow/.ssh
       - ./scripts:/opt/airflow/scripts
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
       - ./requirements.txt:/opt/airflow/requirements.txt
     ports:
       - "127.0.0.1:${AIRFLOW_WEBSERVER_PORT}:8080"
-      - "127.0.0.1:${AIRFLOW_LOG_SERVER_PORT}:8793"
+      - "127.0.0.1:${AIRFLOW_LOG_SERVER_PORT}:8794"
     entrypoint: ./scripts/airflow-entrypoint.sh
     healthcheck:
       test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
