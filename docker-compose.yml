@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: Dockerfile
     hostname: webserver
-    restart: unless-stopped
+    restart: on-failure
     depends_on:
       - postgres
     command: webserver
