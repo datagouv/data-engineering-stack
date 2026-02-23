@@ -15,9 +15,6 @@ cd data-engineering-stack
 # Create a .env file from the .envExample and fill in the required variables.
 # You may also add more variables there for specific DAGs to run.
 
-# For MacOS with ARM:
-# export DOCKER_DEFAULT_PLATFORM="linux/amd64"
-
 # Initialize
 docker compose up airflow-init
 
