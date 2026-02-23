@@ -22,6 +22,7 @@ docker compose up airflow-init
 docker compose up -d
 
 # After few seconds, you can connect to http://localhost:<AIRFLOW_WEBSERVER_PORT> with login : AIRFLOW_ADMIN_MAIL and password : AIRFLOW_ADMIN_PASSWORD
+# If you have kept the default values: http://localhost:8080 and airflow:airflow as user:pwd
 ```
 
 ## Import our DAGs
