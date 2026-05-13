@@ -27,7 +27,7 @@ python-frontmatter==1.1.0
 tenacity==9.0.0
 paramiko==3.5.1
 PyMuPDF==1.25.3
-pygrib==2.1.6
+# pygrib==2.1.6
 sentry-sdk==2.22.0
 lxml_html_clean==0.4.1
 datagouv-client==0.2.3
