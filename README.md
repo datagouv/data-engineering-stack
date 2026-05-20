@@ -1,6 +1,6 @@
 # Infrastructure Airflow
 
-Ce repository a pour objectif de mettre en place rapidement une infrastructure Airflow permettant à chacun.e de tester son DAG avant mise en production. Il est basé sur le [guide d'initialisation](https://airflow.apache.org/docs/apache-airflow/3.1.7/howto/docker-compose/index.html) d'une instance Airflow (s'y référer pour plus de détails). Version actuelle : 3.1.7 
+Ce repository a pour objectif de mettre en place rapidement une infrastructure Airflow permettant à chacun.e de tester son DAG avant mise en production. Il est basé sur le [guide d'initialisation](https://airflow.apache.org/docs/apache-airflow/3.2.1/howto/docker-compose/index.html) d'une instance Airflow (s'y référer pour plus de détails). Version actuelle : 3.2.1 
 
 ## Installation
 
