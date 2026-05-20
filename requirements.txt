@@ -1,3 +1,5 @@
+apache-airflow-client==3.2.1
+apache-airflow-task-sdk==1.2.1
 GitPython==3.1.27
 table-schema-to-markdown==0.4.13
 faust-cchardet==2.1.19
@@ -30,7 +32,7 @@ PyMuPDF==1.25.3
 pygrib==2.1.6
 sentry-sdk==2.22.0
 lxml_html_clean==0.4.1
-datagouv-client==0.2.3
+datagouv-client==0.3.2
 geoparquet-io==0.2.0
 Markdown==3.10.2
 geopandas==1.1.3
