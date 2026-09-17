@@ -31,9 +31,4 @@ cd dags
 git clone git@github.com:datagouv/datagouvfr_data_pipelines.git
 ```
 
-## Refresh dags
-
-```bash
-# Airflow used to have a little time before dag refreshing when dag is created. You can force refreshing with :
-./refreshBagDags.sh
-```
+Wait a few minutes for Airflow to detect the new DAGs.
