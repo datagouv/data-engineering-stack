@@ -25,10 +25,13 @@ docker compose up -d
 # If you have kept the default values: http://localhost:8080 and airflow:airflow as user:pwd
 ```
 
-## Import our DAGs
+## Importer les DAGs de data.gouv.fr
+
 ```bash
 cd dags
 git clone git@github.com:datagouv/datagouvfr_data_pipelines.git
 ```
 
-Wait a few minutes for Airflow to detect the new DAGs.
+Patienter quelques minutes pour qu'Airflow détecte les nouveaux DAGs.
+
+Pour installer un environnement de développement pour les DAGs (version de Python, lint, format, tests, pre-commit), lire le README du dépôt des DAGs : `dags/datagouvfr_data_pipelines/README.md`.
