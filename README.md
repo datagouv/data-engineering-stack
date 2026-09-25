@@ -5,7 +5,7 @@ Ce repository a pour objectif de mettre en place rapidement une infrastructure A
 ## Installation
 
 ```bash
-git clone git@github.com:etalab/data-engineering-stack.git
+git clone git@github.com:datagouv/data-engineering-stack.git
 cd data-engineering-stack
 
 # Create directories necessary for Airflow to work
