@@ -4,6 +4,8 @@ Ce repository a pour objectif de mettre en place rapidement une infrastructure A
 
 ## Installation
 
+Cloner et préparer le dépôt :
+
 ```bash
 git clone git@github.com:datagouv/data-engineering-stack.git
 cd data-engineering-stack
@@ -16,11 +18,17 @@ cd data-engineering-stack
 # Prepare .env file:
 # Create a .env file from the .envExample and fill in the required variables.
 # You may also add more variables there for specific DAGs to run.
+```
 
-# Initialize
+Initialiser Airflow (à lancer une fois). Si `docker` tourne dans une machine virtuelle (VM), il faut d'abord se connecter à cette VM pour lancer la commande :
+
+```
 docker compose up airflow-init
+```
 
-# Launch services
+Lancer les services (AirFlow) :
+
+```
 docker compose up -d
 
 # After few seconds, you can connect to http://localhost:<AIRFLOW_WEBSERVER_PORT> with login : AIRFLOW_ADMIN_MAIL and password : AIRFLOW_ADMIN_PASSWORD
