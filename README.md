@@ -20,13 +20,15 @@ cd data-engineering-stack
 # You may also add more variables there for specific DAGs to run.
 ```
 
-Initialiser Airflow (à lancer une fois). Si `docker` tourne dans une machine virtuelle (VM), il faut d'abord se connecter à cette VM pour lancer la commande :
+Initialiser Airflow. Si `docker` tourne dans une machine virtuelle (VM), il faut d'abord se connecter à cette VM pour lancer la commande :
 
 ```
 docker compose up airflow-init
 ```
 
-Lancer les services (Airflow) :
+## Lancer Airflow
+
+Pour lancer les services (Airflow) :
 
 ```
 docker compose up -d
