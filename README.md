@@ -9,7 +9,9 @@ git clone git@github.com:datagouv/data-engineering-stack.git
 cd data-engineering-stack
 
 # Create directories necessary for Airflow to work
-./prepareDirs.sh
+# and clone the data.gouv.fr DAGs (dags/datagouvfr_data_pipelines) so they are
+# available before the containers start. Git pull if the repository already exists.
+./setup.sh
 
 # Prepare .env file:
 # Create a .env file from the .envExample and fill in the required variables.
@@ -25,13 +27,12 @@ docker compose up -d
 # If you have kept the default values: http://localhost:8080 and airflow:airflow as user:pwd
 ```
 
-## Importer les DAGs de data.gouv.fr
+## DAGs de data.gouv.fr
+
+Le dépôt des DAGs est cloné automatiquement dans `dags/datagouvfr_data_pipelines` par `./setup.sh` (exécuté au-dessus, avant le démarrage des conteneurs). Pour mettre à jour ce dépôt manuellement :
 
 ```bash
-cd dags
-git clone git@github.com:datagouv/datagouvfr_data_pipelines.git
+git -C dags/datagouvfr_data_pipelines pull
 ```
-
-Patienter quelques minutes pour qu'Airflow détecte les nouveaux DAGs.
 
 Pour installer un environnement de développement pour les DAGs (version de Python, lint, format, tests, pre-commit), lire le README du dépôt des DAGs : `dags/datagouvfr_data_pipelines/README.md`.
