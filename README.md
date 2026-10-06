@@ -26,14 +26,13 @@ Initialiser Airflow (à lancer une fois). Si `docker` tourne dans une machine vi
 docker compose up airflow-init
 ```
 
-Lancer les services (AirFlow) :
+Lancer les services (Airflow) :
 
 ```
 docker compose up -d
-
-# After few seconds, you can connect to http://localhost:<AIRFLOW_WEBSERVER_PORT> with login : AIRFLOW_ADMIN_MAIL and password : AIRFLOW_ADMIN_PASSWORD
-# If you have kept the default values: http://localhost:8080 and airflow:airflow as user:pwd
 ```
+
+Après quelques secondes, Airflow est accessible sur `http://localhost:<AIRFLOW_WEBSERVER_PORT>`. Pour se connecter, login : AIRFLOW_ADMIN_MAIL et mot de passe : AIRFLOW_ADMIN_PASSWORD. Les valeurs par défaut sont http://localhost:8080 et `airflow`/`airflow` pour login et mot de passe.
 
 ## DAGs de data.gouv.fr
 
