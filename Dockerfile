@@ -17,5 +17,5 @@ RUN apt-get install libmagic1 -y
 
 USER airflow
 RUN pip install --upgrade pip
-ADD requirements.txt .
+ADD dags/datagouvfr_data_pipelines/requirements.txt .
 RUN pip install apache-airflow==${AIRFLOW_VERSION} -r requirements.txt
