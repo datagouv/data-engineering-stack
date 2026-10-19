@@ -45,3 +45,5 @@ git -C dags/datagouvfr_data_pipelines pull
 ```
 
 Pour installer un environnement de développement pour les DAGs (version de Python, lint, format, tests, pre-commit), lire le README du dépôt des DAGs : `dags/datagouvfr_data_pipelines/README.md`.
+
+Il sera également nécessaire de créer manuellement les connexions dans l'interface d'administration d'Airflow.
