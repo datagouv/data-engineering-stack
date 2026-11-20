@@ -16,6 +16,8 @@ RUN apt-get install jq -y
 RUN apt-get install libmagic1 -y
 
 USER airflow
-RUN pip install --upgrade pip
-ADD dags/datagouvfr_data_pipelines/requirements.txt .
-RUN pip install apache-airflow==${AIRFLOW_VERSION} -r requirements.txt
+# uv ships with the Airflow image. Install only the direct dependencies (not
+# uv.lock, which was resolved without apache-airflow) so they are resolved
+# together with Airflow.
+ADD dags/datagouvfr_data_pipelines/pyproject.toml .
+RUN uv pip install --no-cache apache-airflow==${AIRFLOW_VERSION} -r pyproject.toml
