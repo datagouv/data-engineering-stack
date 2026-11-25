@@ -16,11 +16,11 @@ RUN apt-get install jq -y
 RUN apt-get install libmagic1 -y
 
 USER airflow
-# uv ships with the Airflow image. Install the locked dependencies of the DAGs
-# on top of the image. Export uv.lock rather than using uv sync, which would
-# uninstall the image's packages that are not in the lock. AIRFLOW_VERSION is
-# set by the base image: pinning it makes the build fail if uv.lock was
-# resolved with another Airflow version.
+# uv ships with the Airflow image, whose packages live in the virtualenv set
+# by VIRTUAL_ENV. Sync the locked dependencies of the DAGs into it. --locked
+# fails if uv.lock is out of date with pyproject.toml, and --inexact keeps the
+# image's packages that are not in the lock. AIRFLOW_VERSION is set
+# by the base image: fail the build if uv.lock has another Airflow version.
 COPY dags/datagouvfr_data_pipelines/pyproject.toml dags/datagouvfr_data_pipelines/uv.lock ./
-RUN uv export --frozen --no-dev --no-emit-project --no-hashes -o requirements.txt \
- && uv pip install --no-cache apache-airflow==${AIRFLOW_VERSION} -r requirements.txt
+RUN uv sync --locked --no-default-groups --no-install-project --inexact --active --no-cache \
+ && python -c "import os, airflow; assert airflow.__version__ == os.environ['AIRFLOW_VERSION'], airflow.__version__"
