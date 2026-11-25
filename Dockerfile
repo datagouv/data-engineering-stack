@@ -16,8 +16,11 @@ RUN apt-get install jq -y
 RUN apt-get install libmagic1 -y
 
 USER airflow
-# uv ships with the Airflow image. Install only the direct dependencies (not
-# uv.lock, which was resolved without apache-airflow) so they are resolved
-# together with Airflow.
-ADD dags/datagouvfr_data_pipelines/pyproject.toml .
-RUN uv pip install --no-cache apache-airflow==${AIRFLOW_VERSION} -r pyproject.toml
+# uv ships with the Airflow image. Install the locked dependencies of the DAGs
+# on top of the image. Export uv.lock rather than using uv sync, which would
+# uninstall the image's packages that are not in the lock. AIRFLOW_VERSION is
+# set by the base image: pinning it makes the build fail if uv.lock was
+# resolved with another Airflow version.
+COPY dags/datagouvfr_data_pipelines/pyproject.toml dags/datagouvfr_data_pipelines/uv.lock ./
+RUN uv export --frozen --no-dev --no-emit-project --no-hashes -o requirements.txt \
+ && uv pip install --no-cache apache-airflow==${AIRFLOW_VERSION} -r requirements.txt
