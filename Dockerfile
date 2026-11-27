@@ -16,6 +16,13 @@ RUN apt-get install jq -y
 RUN apt-get install libmagic1 -y
 
 USER airflow
-RUN pip install --upgrade pip
-ADD dags/datagouvfr_data_pipelines/requirements.txt .
-RUN pip install apache-airflow==${AIRFLOW_VERSION} -r requirements.txt
+# uv ships with the Airflow image, whose packages live in the virtualenv set
+# by VIRTUAL_ENV. Sync the locked dependencies of the DAGs into it. --locked
+# fails if uv.lock is out of date with pyproject.toml, and --inexact keeps the
+# image's packages that are not in the lock. AIRFLOW_VERSION is set
+# by the base image: fail the build if uv.lock has another Airflow version.
+COPY dags/datagouvfr_data_pipelines/pyproject.toml dags/datagouvfr_data_pipelines/uv.lock ./
+RUN uv sync --locked --no-default-groups --no-install-project --inexact --active --no-cache \
+ # fail on conflicting dependencies in the virtualenv
+ && uv pip check \
+ && python -c "import os, airflow; assert airflow.__version__ == os.environ['AIRFLOW_VERSION'], airflow.__version__"
