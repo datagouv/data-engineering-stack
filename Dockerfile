@@ -23,4 +23,6 @@ USER airflow
 # by the base image: fail the build if uv.lock has another Airflow version.
 COPY dags/datagouvfr_data_pipelines/pyproject.toml dags/datagouvfr_data_pipelines/uv.lock ./
 RUN uv sync --locked --no-default-groups --no-install-project --inexact --active --no-cache \
+ # fail on conflicting dependencies in the virtualenv
+ && uv pip check \
  && python -c "import os, airflow; assert airflow.__version__ == os.environ['AIRFLOW_VERSION'], airflow.__version__"
